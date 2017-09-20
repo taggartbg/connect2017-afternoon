@@ -12,11 +12,17 @@ class Exercise2 extends Component {
 
     return (
       <div>
-        Exercise 2
+        <p>Exercise 2</p>
         { enhanced ?  "I'm enhanced!" : "I'm not enhanced :(" }
       </div>
     )
   }
 }
 
-export default Exercise2;
+function enhanceComponent(InputComponent) {
+  return function EnhancedComponent(props) {
+    return <InputComponent {...props} enhanced={true} />
+  }
+}
+
+export default enhanceComponent(Exercise2);

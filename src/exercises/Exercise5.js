@@ -6,28 +6,30 @@ Create a decorator that will auto-bind the class method to the class instance
 
 */
 
+function autobind(target, key, descriptor) {
+  // debugger
+  target[key] = target[key].bind(this);
+}
+
 class Exercise5 extends Component {
   constructor(props) {
     super();
     this.state = {
-      data: [1,2,3]
+      'key': 'val'
     };
 
-    this.getDataLength = this.getDataLength.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
   }
 
-  getDataLength() {
-    return this.state.data && this.state.data.length;
+  @autobind
+  handleClick(evt) {
+    console.log("VALUE: ", this.state.key);
   }
 
   render() {
-    const { data } = this.state;
-
     return (
-      <div>
+      <div onClick={this.handleClick}>
         Exercise 5
-        Initial data: { data.toString() }
-        Data length: { this.getDataLength() }
       </div>
     )
   }

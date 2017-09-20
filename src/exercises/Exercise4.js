@@ -8,6 +8,18 @@ BONUS: pass "enhance" a parameter to ALSO be passed down as a prop
 
 */
 
+function myDecorator(Target) {
+  // return class EnhancedComponent extends Component {
+  //   render() {
+  //     return <Target {...this.props} enhanced={true} />
+  //   }
+  // }
+
+  Target.defaultProps = {enhanced: true};
+  // return Target;
+}
+
+@myDecorator
 class Exercise4 extends Component {
   render() {
     const { enhanced } = this.props;

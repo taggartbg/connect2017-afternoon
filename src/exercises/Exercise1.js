@@ -7,7 +7,7 @@ Create a function that memoizes the result of another function passed in. If you
 Example:
 const upperCase = memoize((string) => {
   return string.toUpperCase();
-});
+});d
 
 upperCase('fred'); => 'FRED'
 upperCase('fred'); => 'FRED' but pulled from cache as opposed to being recomputed again
@@ -15,7 +15,19 @@ upperCase('fred'); => 'FRED' but pulled from cache as opposed to being recompute
 */
 
 function memoize(fn) {
-  // implement me, please!
+  let cache = {};
+
+  return function(...args) {
+    const key = JSON.stringify(args);
+
+    if (key in cache) {
+      return cache[key];
+    }
+
+    cache[key] = fn(...args);
+    console.log("SAVING");
+    return cache[key];
+  }
 }
 window.memoize = memoize;
 

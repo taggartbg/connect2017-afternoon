@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
 
-import Exercise1 from './exercises/Exercise1';
+import MyComponent from './exercises/Exercise6';
 
 ReactDOM.render(
-  <Exercise1 />,
+  <MyComponent />,
   document.getElementById('root')
 );

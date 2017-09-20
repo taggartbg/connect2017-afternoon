@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
 /* TODO:
 
@@ -12,8 +12,8 @@ function mockFetch() {
       resolve({
         myFakeKey: 'myFakeValue'
       })
-    }, 500);
-  )}
+    }, 5000);
+  })
 }
 
 class Exercise3 extends Component {
@@ -28,5 +28,37 @@ class Exercise3 extends Component {
     )
   }
 }
+Exercise3.propTypes = {
+  data: PropTypes.string.isRequired
+}
+Exercise3.defaultProps = {
+  data: 'my default prop'
+}
 
-export default Exercise3;
+function fetcher(InputComponent) {
+  return class WrappedComponent extends Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        data: undefined
+      }
+    }
+
+    componentDidMount() {
+      let myPromise = mockFetch();
+      myPromise.then((res) => {
+        //res == {...}
+        this.setState({
+          data: res.myFakeKey
+        });
+      });
+    }
+
+    render() {
+      const {data} = this.state;
+      return <InputComponent {...{data}} {...this.props} />
+    }
+  }
+}
+
+export default fetcher(Exercise3);
